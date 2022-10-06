@@ -1,12 +1,23 @@
-import { StyleSheet } from "react-native";
+import { useState } from 'react';
 
-import { Button, TextInput, View } from "react-native";
+import { Button, StyleSheet, TextInput, View } from 'react-native';
 
 const ProductInput = () => {
+    const [productName, setProductName] = useState('');
+
+    const changeTextHandler = (value) => {
+        console.log(value);
+        setProductName(value);
+    }
+
     return (
-      <View style={styles.productInput}>
-          <TextInput style={styles.productName} placeholder='Introduzca un producto' />
-          <Button style={styles.addButton} title="Añadir" />
+      <View style={ styles.productInput }>
+          <TextInput style={ styles.productName } 
+            placeholder='Introduzca un producto' 
+            keyboardType="default"
+            onChangeText={ changeTextHandler } 
+            value={ productName }/>
+          <Button style={ styles.addButton } title="Añadir" />
       </View>
     );
 }

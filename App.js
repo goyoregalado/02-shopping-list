@@ -34,17 +34,13 @@ const styles = StyleSheet.create({
   productList: {
     marginTop: 10,
     width: '100%',
-    borderWidth: 4,
-    borderColor: 'yellow',
     alignItems: 'center'
   },
   listItem: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    borderColor: 'black',
     backgroundColor: 'white',
-    borderWidth: 2,
     borderRadius: 5,
     width: '80%',
     marginBottom: 5,

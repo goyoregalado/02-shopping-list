@@ -27,14 +27,15 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
-        backgroundColor: "#eef4ed",
+        backgroundColor: "#ad1457",
         width: '80%',
         height: 80,
         borderRadius: 5,
         padding: 10
     },
     productName: {
-        flex: 4
+        flex: 4,
+        color: 'white'
     },
     addButton: {
         flex: 1

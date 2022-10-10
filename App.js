@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import ProductInput from './components/ProductInput';
+import ListItem from './components/ListItem';
 
 export default function App() {
   const [ products, setProducts ] = useState(['Aguas grises', 'Agua mineral', 'Berenjenas', 'Plátanos', 'Cheetos']);
@@ -10,10 +11,7 @@ export default function App() {
       <View style={styles.productList}>
         { products.map((product, idx) => {
             return (
-              <View key={idx} style={styles.listItem}>
-                <Image style={styles.productImage} source={require('./assets/bigIcon.png')}/>
-                <Text style={styles.productName}>{product}</Text>
-              </View>
+              <ListItem key={idx+product} productName={product} />
             );
         }) }
       </View>
@@ -35,27 +33,5 @@ const styles = StyleSheet.create({
     marginTop: 10,
     width: '100%',
     alignItems: 'center'
-  },
-  listItem: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: 'white',
-    borderRadius: 5,
-    width: '80%',
-    marginBottom: 5,
-    paddingHorizontal: 5
-  },
-  productImage: {
-    width: 50,
-    height: 50
-  },
-
-  productName: {
-    fontSize: 18,
-    textAlign: 'center',
-    alignContent: 'center'
   }
-
-
 });

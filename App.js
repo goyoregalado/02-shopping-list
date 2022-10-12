@@ -4,16 +4,14 @@ import ProductInput from './components/ProductInput';
 import ListItem from './components/ListItem';
 
 export default function App() {
-  const [ products, setProducts ] = useState(['Aguas grises', 'Agua mineral', 'Berenjenas', 'Plátanos', 'Cheetos']);
+  const [ products, setProducts ] = useState(['Agua mineral', 'Berenjenas', 'Plátanos', 'Cheetos']);
   return (
     <View style={styles.container}>
       <ProductInput />
       <View style={styles.productList}>
-        { products.map((product, idx) => {
-            return (
-              <ListItem key={idx+product} productName={product} />
-            );
-        }) }
+        { 
+          products.map((product, idx) => (<ListItem key={idx+product} productName={product} />))
+        }
       </View>
     </View>
   );

@@ -1,11 +1,19 @@
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { 
+    Image,
+    Pressable, 
+    StyleSheet, 
+    Text, 
+    View } from 'react-native';
 
-const ListItem = ({ productName }) => {
+const ListItem = ({ productName, onProductRemove }) => {
   return (
-      <View style={styles.listItem}>
-          <Image style={styles.productImage} source={require('../assets/bigIcon.png')} />
-          <Text style={styles.productName}>{productName}</Text>
-      </View>
+        <View style={styles.listItem}>
+            <Pressable style={{flexDirection: 'row'}} onPress={() => onProductRemove(productName)}>
+                <Image style={styles.productImage} source={require('../assets/bigIcon.png')} />
+            </Pressable>
+            <Text style={styles.productName}>{productName}</Text>
+            
+        </View>
     )
 }
 

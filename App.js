@@ -1,16 +1,18 @@
 import { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import ProductInput from './components/ProductInput';
 import ListItem from './components/ListItem';
 
 export default function App() {
-  const [ products, setProducts ] = useState(['Agua mineral', 'Berenjenas', 'Plátanos', 'Cheetos']);
+  const [ products, setProducts ] = useState([]);
   return (
     <View style={styles.container}>
       <ProductInput />
       <View style={styles.productList}>
         { 
-          products.map((product, idx) => (<ListItem key={idx+product} productName={product} />))
+          products.length === 0 
+            ? <Text>Aún no hay productos</Text> 
+            : products.map((product, idx) => (<ListItem key={idx+product} productName={product} />))
         }
       </View>
     </View>

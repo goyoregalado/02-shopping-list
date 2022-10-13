@@ -5,9 +5,14 @@ import ListItem from './components/ListItem';
 
 export default function App() {
   const [ products, setProducts ] = useState([]);
+
+  const addProductHandler = (productName) => {
+    setProducts(() => [...products, productName]);
+  }
+
   return (
     <View style={styles.container}>
-      <ProductInput />
+      <ProductInput onProductAdd={addProductHandler}/>
       <View style={styles.productList}>
         { 
           products.length === 0 

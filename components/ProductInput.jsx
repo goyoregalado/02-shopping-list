@@ -2,23 +2,33 @@ import { useState } from 'react';
 
 import { Button, StyleSheet, TextInput, View } from 'react-native';
 
-const ProductInput = () => {
+const ProductInput = ({ onProductAdd }) => {
     const [productName, setProductName] = useState('');
 
     const changeTextHandler = (value) => {
-        console.log(value);
         setProductName(value);
     }
 
+    const addProductHandler = () => {
+        const sanitizedName = productName.trim()
+        if (sanitizedName !== '') {
+            onProductAdd(sanitizedName);
+        }
+        setProductName('');
+    }
+
     return (
-      <View style={ styles.productInput }>
-          <TextInput style={ styles.productName } 
-            placeholder='Introduzca un producto' 
-            keyboardType="default"
-            onChangeText={ changeTextHandler } 
-            value={ productName }/>
-          <Button style={ styles.addButton } title="Añadir" />
-      </View>
+        <View style={styles.productInput}>
+            <TextInput style={styles.productName}
+                placeholder='Introduzca un producto'
+                keyboardType="default"
+                onChangeText={changeTextHandler}
+                value={productName} />
+            <Button
+                style={styles.addButton}
+                title="Añadir"
+                onPress={addProductHandler} />
+        </View>
     );
 }
 

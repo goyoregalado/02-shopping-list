@@ -18,34 +18,36 @@ const ProductInput = ({ onProductAdd }) => {
     }
 
     return (
-        <View style={styles.productInput}>
-            <TextInput style={styles.productName}
-                placeholder='Introduzca un producto'
-                keyboardType="default"
-                onChangeText={changeTextHandler}
-                value={productName} />
-            <Button
-                style={styles.addButton}
-                title="Añadir"
-                onPress={addProductHandler} />
+        <View>
+            <View style={styles.productInput}>
+                <TextInput style={styles.productName}
+                    placeholder='Introduzca un producto'
+                    keyboardType="default"
+                    onChangeText={changeTextHandler}
+                    value={productName} />
+            </View>
+            <View>
+                <Button
+                    style={styles.addButton}
+                    title="Añadir"
+                    onPress={addProductHandler} />
+            </View>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     productInput: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
         alignItems: 'center',
-        backgroundColor: "#ad1457",
-        width: '80%',
-        height: 80,
+        backgroundColor: "#73e8ff",
+        width: '100%',
+        height: 50,
         borderRadius: 5,
         padding: 10
     },
     productName: {
         flex: 4,
-        color: 'white'
+        color: 'black'
     },
     addButton: {
         flex: 1

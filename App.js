@@ -11,28 +11,26 @@ export default function App() {
   }
 
   const removeProductHandler = (productName) => {
-    console.log(productName);
     setProducts(() => products.filter((product) => product !== productName));
   }
 
   return (
     <View style={styles.container}>
       <ProductInput onProductAdd={addProductHandler}/>
-
-        <ScrollView style={styles.productScroll}>
-        <View style={styles.productList}>
-          { 
-            products.length === 0 
-              ? <Text>Aún no hay productos</Text> 
-              : products.map((product, idx) => (
-                <ListItem 
-                  key={idx+product} 
-                  productName={product} 
-                  onProductRemove={removeProductHandler}/>
-              ))
-          }
-        </View>
-        </ScrollView>
+      <ScrollView style={styles.productScroll}>
+      <View style={styles.productList}>
+        { 
+          products.length === 0 
+            ? <Text>Aún no hay productos</Text> 
+            : products.map((product, idx) => (
+              <ListItem 
+                key={idx+product} 
+                productName={product} 
+                onProductRemove={removeProductHandler}/>
+            ))
+        }
+      </View>
+      </ScrollView>
     </View>
   );
 }
@@ -44,7 +42,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     width: '100%',
     marginTop: 30,
-    backgroundColor: 'lightgray',
+    backgroundColor: '#fdff58',
 
   },
   productList: {

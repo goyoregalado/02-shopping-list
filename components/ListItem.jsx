@@ -11,7 +11,7 @@ const ListItem = ({ productName, onProductRemove }) => {
             <Pressable style={{flexDirection: 'row'}} onPress={() => onProductRemove(productName)}>
                 <Image style={styles.productImage} source={require('../assets/bigIcon.png')} />
             </Pressable>
-            <Text style={styles.productName}>{productName}</Text>
+            <Text style={styles.productName}>{productName.name}</Text>
             
         </View>
     )

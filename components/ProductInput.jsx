@@ -3,16 +3,28 @@ import { useState } from 'react';
 import { Button, StyleSheet, TextInput, View } from 'react-native';
 
 const ProductInput = ({ onProductAdd }) => {
-    const [productName, setProductName] = useState('');
+    const [productName, setProductName] = useState({
+        id:"",
+        name:"",
+        quantity:"",
+        bought:"",
+        type:""
+    }
+    );
 
     const changeTextHandler = (value) => {
-        setProductName(value);
+        setProductName((productName)=>{
+            return{
+                ...productName,
+                name:value.trim()
+            }
+        });
     }
 
     const addProductHandler = () => {
-        const sanitizedName = productName.trim()
-        if (sanitizedName !== '') {
-            onProductAdd(sanitizedName);
+        
+        if (productName.name !== '') {
+            onProductAdd(productName);
         }
         setProductName('');
     }

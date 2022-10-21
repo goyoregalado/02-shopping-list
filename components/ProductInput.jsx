@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import SelectDropdown from 'react-native-select-dropdown'
 import { Button, StyleSheet, TextInput, View } from 'react-native';
-const countries = ["Egypt", "Canada", "Australia", "Ireland"]
+const countries = ["fruit", "vegetable", "bakery", "fish", "meat"]
 const ProductInput = ({ onProductAdd }) => {
     const [productName, setProductName] = useState({
         id:"",
@@ -21,12 +21,15 @@ const ProductInput = ({ onProductAdd }) => {
         });
     }
     const changeTypeHandler = (value) =>{
+        
+
         setProductName((productName)=>{
             return{
                 ...productName,
                 type:value
             }
         })
+    
     }
     const addProductHandler = () => {
         

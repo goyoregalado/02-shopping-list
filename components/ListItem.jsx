@@ -9,7 +9,24 @@ const ListItem = ({ productName, onProductRemove }) => {
   return (
         <View style={styles.listItem}>
             <Pressable style={{flexDirection: 'row'}} onPress={() => onProductRemove(productName)}>
-                <Image style={styles.productImage} source={require('../assets/bigIcon.png')} />
+
+            {
+                productName.type === "fruit"? <Image style={styles.productImage} source={require('../assets/fruta.jpg')} />: null     
+            }
+            {
+                productName.type === "vegetable"? <Image style={styles.productImage} source={require('../assets/verdura.jpg')} />: null
+            }
+            {
+                productName.type === "meat" ? <Image style={styles.productImage} source={require('../assets/carne.jpg')} />: null
+            }
+            {
+                productName.type === "bakery" ? <Image style={styles.productImage} source={require('../assets/pan.jpg')} />: null
+            }
+            {
+                productName.type === "fish" ? <Image style={styles.productImage} source={require('../assets/pescado.jpg')} />: null
+            }   
+
+                
             </Pressable>
             <Text style={styles.productName}>{productName.name}</Text>
             
@@ -30,7 +47,8 @@ const styles = StyleSheet.create({
     },
     productImage: {
         width: 50,
-        height: 50
+        height: 50,
+        borderRadius:50
     },
     productName: {
         fontSize: 18,

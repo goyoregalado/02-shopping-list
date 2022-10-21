@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View, Button} from 'react-native';
 import ProductInput from './components/ProductInput';
 import ListItem from './components/ListItem';
 
@@ -13,6 +13,9 @@ export default function App() {
   const removeProductHandler = (productName) => {
     console.log(productName);
     setProducts(() => products.filter((product) => product !== productName));
+  }
+  const removeAll =()=>{
+    setProducts([])
   }
 
   return (
@@ -31,6 +34,12 @@ export default function App() {
                   onProductRemove={removeProductHandler}/>
               ))
           }
+        </View>
+        <View>
+        <Button
+                style={styles.addButton}
+                title="borrar"
+                onPress={removeAll} />
         </View>
         </ScrollView>
     </View>

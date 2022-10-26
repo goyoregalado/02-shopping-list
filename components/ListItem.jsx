@@ -6,7 +6,13 @@ import {
     View } from 'react-native';
 
 const ListItem = ({ productName, onProductRemove }) => {
+    const port = 0
   return (
+    <View>
+
+    
+        
+        
         <View style={styles.listItem}>
             <Pressable style={{flexDirection: 'row'}} onPress={() => onProductRemove(productName)}>
 
@@ -28,9 +34,11 @@ const ListItem = ({ productName, onProductRemove }) => {
 
                 
             </Pressable>
-            <Text style={styles.productName}>{productName.name}</Text>
+            <Text style={styles.productName}>cantidad: {productName.quantity} {productName.name}</Text>
             
         </View>
+        
+    </View>
     )
 }
 

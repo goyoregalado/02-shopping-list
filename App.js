@@ -29,7 +29,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <ProductInput onProductAdd={addProductHandler} productName={productName} setProducts={setProductName}/>
-
+        
         <ScrollView style={styles.productScroll}>
         <View style={styles.productList}>
           { 

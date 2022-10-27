@@ -6,12 +6,18 @@ import {
     View } from 'react-native';
 
 const ListItem = ({ productName, onProductRemove }) => {
-    const port = 0
+    let port = 0
+    const onProductSelect=()=>{
+        console.log(port)
+        port = 1
+    }
+    
   return (
     <View>
 
     {
-        port === 0 ?
+        
+        port == 0 ?
         <View style={styles.listItem}>
             <Pressable style={{flexDirection: 'row'}} onPress={() => onProductRemove(productName)}>
 

@@ -10,9 +10,8 @@ const ListItem = ({ productName, onProductRemove }) => {
   return (
     <View>
 
-    
-        
-        
+    {
+        port === 0 ?
         <View style={styles.listItem}>
             <Pressable style={{flexDirection: 'row'}} onPress={() => onProductRemove(productName)}>
 
@@ -37,6 +36,31 @@ const ListItem = ({ productName, onProductRemove }) => {
             <Text style={styles.productName}>cantidad: {productName.quantity} {productName.name}</Text>
             
         </View>
+        :<View style={styles.listItemSelect}>
+        <Pressable style={{flexDirection: 'row'}} onPress={() => onProductRemove(productName)}>
+
+        {
+            productName.type === "fruit"? <Image style={styles.productImage} source={require('../assets/fruta.jpg')} />: null     
+        }
+        {
+            productName.type === "vegetable"? <Image style={styles.productImage} source={require('../assets/verdura.jpg')} />: null
+        }
+        {
+            productName.type === "meat" ? <Image style={styles.productImage} source={require('../assets/carne.jpg')} />: null
+        }
+        {
+            productName.type === "bakery" ? <Image style={styles.productImage} source={require('../assets/pan.jpg')} />: null
+        }
+        {
+            productName.type === "fish" ? <Image style={styles.productImage} source={require('../assets/pescado.jpg')} />: null
+        }   
+
+            
+        </Pressable>
+        <Text style={styles.productNameSelect}>cantidad: {productName.quantity} {productName.name}</Text>
+        
+    </View>
+    }
         
     </View>
     )
@@ -49,7 +73,19 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: 'white',
         borderRadius: 5,
-        width: '80%',
+        width: '60%',
+        height:62,
+        marginBottom: 5,
+        paddingHorizontal: 5
+    },
+    listItemSelect: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        backgroundColor: 'grey',
+        borderRadius: 5,
+        width: '60%',
+        height:62,
         marginBottom: 5,
         paddingHorizontal: 5
     },
@@ -61,8 +97,9 @@ const styles = StyleSheet.create({
     productName: {
         fontSize: 18,
         textAlign: 'center',
-        alignContent: 'center'
-    }
+        alignContent: 'center',
+    },
+    
 });
 
 export default ListItem

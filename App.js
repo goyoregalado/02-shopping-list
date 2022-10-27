@@ -8,7 +8,7 @@ export default function App() {
     id:"",
     name:"",
     quantity:"",
-    bought:"",
+    bought:0,
     type:""
 });
 
@@ -17,7 +17,7 @@ export default function App() {
   const addProductHandler = (productName) => {
     setProducts(() => [...products, productName]);
   }
-
+  
   const removeProductHandler = (productName) => {
     console.log(productName);
     setProducts(() => products.filter((product) => product !== productName));
@@ -39,6 +39,7 @@ export default function App() {
                 <ListItem 
                   key={idx+product} 
                   productName={product} 
+                  setProductName={setProductName}
                   onProductRemove={removeProductHandler}/>
               ))
           }

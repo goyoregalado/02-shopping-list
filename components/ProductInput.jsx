@@ -44,7 +44,14 @@ const ProductInput = ({ onProductAdd, productName, setProducts }) => {
         if (productName.name !== undefined) {
             onProductAdd(productName);
         }
-        setProducts('');
+        setProducts((productName)=>{
+            return{
+                ...productName,
+                name:'',
+                quantity:1,
+                type:'type'
+            }
+        });
     }
 
     return (
@@ -54,11 +61,11 @@ const ProductInput = ({ onProductAdd, productName, setProducts }) => {
                     placeholder='Introduzca un producto'
                     keyboardType="default"
                     onChangeText={changeNameHandler}
-                    value={productName} />
+                    value={productName.name} />
 
                 <SelectDropdown
                     buttonStyle={styles.select}
-                    defaultButtonText="Type"
+                    defaultButtonText={productName.type}
                     data={countries}
                     onSelect={(selectedItem, index) => {
                         changeTypeHandler(selectedItem)
@@ -76,7 +83,7 @@ const ProductInput = ({ onProductAdd, productName, setProducts }) => {
                 />      
             </View>
             <View style={styles.secondLine}>
-                <NumericInput type='up-down' onChange={value => changeNumericHandler(value)} />
+                <NumericInput type='up-down' initValue={productName.quantity} onChange={value => changeNumericHandler(value)} />
                 <Button
                 style={styles.addButton}
                 title="Añadir"

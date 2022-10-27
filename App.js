@@ -4,6 +4,14 @@ import ProductInput from './components/ProductInput';
 import ListItem from './components/ListItem';
 
 export default function App() {
+  const [productName, setProductName] = useState({
+    id:"",
+    name:"",
+    quantity:"",
+    bought:"",
+    type:""
+});
+
   const [ products, setProducts ] = useState([]);
 
   const addProductHandler = (productName) => {
@@ -20,7 +28,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <ProductInput onProductAdd={addProductHandler}/>
+      <ProductInput onProductAdd={addProductHandler} productName={productName} setProducts={setProductName}/>
 
         <ScrollView style={styles.productScroll}>
         <View style={styles.productList}>

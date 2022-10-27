@@ -15,21 +15,21 @@ const ListItem = ({ productName, onProductRemove }) => {
         <View style={styles.listItem}>
             <Pressable style={{flexDirection: 'row'}} onPress={() => onProductRemove(productName)}>
 
-            {
-                productName.type === "fruit"? <Image style={styles.productImage} source={require('../assets/fruta.jpg')} />: null     
-            }
-            {
-                productName.type === "vegetable"? <Image style={styles.productImage} source={require('../assets/verdura.jpg')} />: null
-            }
-            {
-                productName.type === "meat" ? <Image style={styles.productImage} source={require('../assets/carne.jpg')} />: null
-            }
-            {
-                productName.type === "bakery" ? <Image style={styles.productImage} source={require('../assets/pan.jpg')} />: null
-            }
-            {
-                productName.type === "fish" ? <Image style={styles.productImage} source={require('../assets/pescado.jpg')} />: null
-            }   
+                {
+                    productName.type === "fruit"? <Image style={styles.productImage} source={require('../assets/fruta.jpg')} />: null     
+                }
+                {
+                    productName.type === "vegetable"? <Image style={styles.productImage} source={require('../assets/verdura.jpg')} />: null
+                }
+                {
+                    productName.type === "meat" ? <Image style={styles.productImage} source={require('../assets/carne.jpg')} />: null
+                }
+                {
+                    productName.type === "bakery" ? <Image style={styles.productImage} source={require('../assets/pan.jpg')} />: null
+                }
+                {
+                    productName.type === "fish" ? <Image style={styles.productImage} source={require('../assets/pescado.jpg')} />: null
+                }   
 
                 
             </Pressable>
@@ -37,29 +37,29 @@ const ListItem = ({ productName, onProductRemove }) => {
             
         </View>
         :<View style={styles.listItemSelect}>
-        <Pressable style={{flexDirection: 'row'}} onPress={() => onProductRemove(productName)}>
+            <Pressable style={{flexDirection: 'row'}} onPress={() => onProductRemove(productName)}>
 
-        {
-            productName.type === "fruit"? <Image style={styles.productImage} source={require('../assets/fruta.jpg')} />: null     
-        }
-        {
-            productName.type === "vegetable"? <Image style={styles.productImage} source={require('../assets/verdura.jpg')} />: null
-        }
-        {
-            productName.type === "meat" ? <Image style={styles.productImage} source={require('../assets/carne.jpg')} />: null
-        }
-        {
-            productName.type === "bakery" ? <Image style={styles.productImage} source={require('../assets/pan.jpg')} />: null
-        }
-        {
-            productName.type === "fish" ? <Image style={styles.productImage} source={require('../assets/pescado.jpg')} />: null
-        }   
+                {
+                    productName.type === "fruit"? <Image style={styles.productImage} source={require('../assets/fruta.jpg')} />: null     
+                }
+                {
+                    productName.type === "vegetable"? <Image style={styles.productImage} source={require('../assets/verdura.jpg')} />: null
+                }
+                {
+                    productName.type === "meat" ? <Image style={styles.productImage} source={require('../assets/carne.jpg')} />: null
+                }
+                {
+                    productName.type === "bakery" ? <Image style={styles.productImage} source={require('../assets/pan.jpg')} />: null
+                }
+                {
+                    productName.type === "fish" ? <Image style={styles.productImage} source={require('../assets/pescado.jpg')} />: null
+                }   
 
-            
-        </Pressable>
-        <Text style={styles.productNameSelect}>cantidad: {productName.quantity} {productName.name}</Text>
+                
+            </Pressable>
+            <Text style={styles.productNameSelect}>cantidad: {productName.quantity} {productName.name}</Text>
         
-    </View>
+        </View>
     }
         
     </View>
@@ -98,8 +98,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         textAlign: 'center',
         alignContent: 'center',
-    },
-    
+    }
 });
 
 export default ListItem

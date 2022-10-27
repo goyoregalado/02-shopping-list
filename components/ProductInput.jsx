@@ -3,50 +3,48 @@ import SelectDropdown from 'react-native-select-dropdown';
 import NumericInput from 'react-native-numeric-input';
 import { Button, StyleSheet, TextInput, View } from 'react-native';
 const countries = ["fruit", "vegetable", "bakery", "fish", "meat"]
-const ProductInput = ({ onProductAdd }) => {
-    const [productName, setProductName] = useState({
-        id:"",
-        name:"",
-        quantity:"",
-        bought:"",
-        type:""
-    }
-    );
+const ProductInput = ({ onProductAdd, productName, setProducts }) => {
+    
 
     const changeNameHandler = (value) => {
-        setProductName((productName)=>{
+
+        setProducts((productName)=>{
             return{
                 ...productName,
                 name:value.trim()
             }
         });
-    }
-    const changeTypeHandler = (value) =>{
-        
 
-        setProductName((productName)=>{
+    }
+
+
+    const changeTypeHandler = (value) =>{
+  
+        setProducts((productName)=>{
             return{
                 ...productName,
                 type:value
             }
         })
-    
     }
+    
 
     const changeNumericHandler =(value)=>{
-        setProductName((productName)=>{
+        setProducts((productName)=>{
             return{
                 ...productName,
                 quantity:value
             }
         })
     }
+
+    
     const addProductHandler = () => {
         
         if (productName.name !== undefined) {
             onProductAdd(productName);
         }
-        setProductName('');
+        setProducts('');
     }
 
     return (

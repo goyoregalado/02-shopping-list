@@ -7,7 +7,22 @@ import {
 import { useState } from 'react';
 const ListItem = ({ productName, onProductRemove, setProductName }) => {
     const [ port , setport] = useState(0)
-
+    const changeImage = () =>{
+        let imagen
+        switch (productName.type){
+            case "fruit":
+              return require('../assets/fruta.jpg')
+                
+            case "vegetable":
+                return require('../assets/verdura.jpg')
+            case "bakery":
+                return require('../assets/pan.jpg')
+            case "fish":
+                return require('../assets/pescado.jpg')
+            case "meat":
+                return require('../assets/carne.jpg')
+        }
+    }
 
     const seleInput = (value) =>{
         
@@ -31,48 +46,13 @@ const ListItem = ({ productName, onProductRemove, setProductName }) => {
         port == 0 ?
         <View style={styles.listItem}>
             <Pressable style={{flexDirection: 'row'}} onPress={() => seleInput(1)}>
-
-                {
-                    productName.type === "fruit"? <Image style={styles.productImage} source={require('../assets/fruta.jpg')} />: null     
-                }
-                {
-                    productName.type === "vegetable"? <Image style={styles.productImage} source={require('../assets/verdura.jpg')} />: null
-                }
-                {
-                    productName.type === "meat" ? <Image style={styles.productImage} source={require('../assets/carne.jpg')} />: null
-                }
-                {
-                    productName.type === "bakery" ? <Image style={styles.productImage} source={require('../assets/pan.jpg')} />: null
-                }
-                {
-                    productName.type === "fish" ? <Image style={styles.productImage} source={require('../assets/pescado.jpg')} />: null
-                }   
-
-                
+                <Image style={styles.productImage} source={changeImage()} />    
             </Pressable>
             <Text style={styles.productName}>cantidad: {productName.quantity} {productName.name}</Text>
-            
         </View>
         :<View style={styles.listItemSelect}>
             <Pressable style={{flexDirection: 'row'}} onPress={() => seleInput(0)}>
-
-                {
-                    productName.type === "fruit"? <Image style={styles.productImage} source={require('../assets/fruta.jpg')} />: null     
-                }
-                {
-                    productName.type === "vegetable"? <Image style={styles.productImage} source={require('../assets/verdura.jpg')} />: null
-                }
-                {
-                    productName.type === "meat" ? <Image style={styles.productImage} source={require('../assets/carne.jpg')} />: null
-                }
-                {
-                    productName.type === "bakery" ? <Image style={styles.productImage} source={require('../assets/pan.jpg')} />: null
-                }
-                {
-                    productName.type === "fish" ? <Image style={styles.productImage} source={require('../assets/pescado.jpg')} />: null
-                }   
-
-                
+                <Image style={styles.productImage} source={changeImage()} ></Image>     
             </Pressable>
             <Text style={styles.productNameSelect}>cantidad: {productName.quantity} {productName.name}</Text>
         

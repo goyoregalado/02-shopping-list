@@ -5,14 +5,48 @@ import {
     Text, 
     View } from 'react-native';
 
-const ListItem = ({ productName, onProductRemove }) => {
+const ListItem = ({productId, productName, productQuantity, productType, onProductRemove }) => {
+
+    const handleImage = (type) => {
+        let result;
+
+        switch (type){
+
+            case 'fruit':
+                result = require('../assets/fruit.png');
+                break;
+
+            case 'fish':
+                result = require('../assets/fish.png');
+                break;
+
+            case 'meat':
+                result = require('../assets/meat.png');
+                break;
+
+            case 'bakery':
+                result = require('../assets/bakery.png');
+                break;
+
+            case 'vegetable':
+                result = require('../assets/vegetable.png');
+                break;   
+                
+            default:
+                result = require('../assets/fruit.png');
+                break;
+        }
+
+        return result;
+    }
+
   return (
         <View style={styles.listItem}>
-            <Pressable style={{flexDirection: 'row'}} onPress={() => onProductRemove(productName)}>
-                <Image style={styles.productImage} source={require('../assets/bigIcon.png')} />
+            <Pressable style={{flexDirection: 'row'}} onPress={() => onProductRemove(productId)}>
+                <Image style={styles.productImage} source={handleImage(productType)} />
             </Pressable>
             <Text style={styles.productName}>{productName}</Text>
-            
+            <Text style={styles.productName}>x{productQuantity}</Text>
         </View>
     )
 }

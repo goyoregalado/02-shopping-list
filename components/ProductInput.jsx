@@ -49,7 +49,7 @@ const ProductInput = ({ onProductAdd, productName, setProducts }) => {
                 ...productName,
                 name:'',
                 quantity:1,
-                type:'type'
+                type:productName.type
             }
         });
     }
@@ -66,14 +66,15 @@ const ProductInput = ({ onProductAdd, productName, setProducts }) => {
                 <SelectDropdown
                     buttonStyle={styles.select}
                     defaultButtonText={productName.type}
+                    
                     data={countries}
                     onSelect={(selectedItem, index) => {
                         changeTypeHandler(selectedItem)
                     }}
-                    buttonTextAfterSelection={(selectedItem, index) => {
+                    buttonTextAfterSelection={() => {
                         // text represented after item is selected
                         // if data array is an array of objects then return selectedItem.property to render after item is selected
-                        return selectedItem
+                        return productName.type
                     }}
                     rowTextForSelection={(item, index) => {
                         // text represented for each item in dropdown
@@ -83,7 +84,7 @@ const ProductInput = ({ onProductAdd, productName, setProducts }) => {
                 />      
             </View>
             <View style={styles.secondLine}>
-                <NumericInput type='up-down' initValue={productName.quantity} onChange={value => changeNumericHandler(value)} />
+                <NumericInput type='up-down' editable={false} initValue={productName.quantity} onChange={value => changeNumericHandler(value)} />
                 <Button
                 style={styles.addButton}
                 title="Añadir"

@@ -7,9 +7,9 @@ export default function App() {
   const [productName, setProductName] = useState({
     id:"",
     name:"",
-    quantity:"",
+    quantity:1,
     bought:0,
-    type:""
+    type:"types"
 });
 
   const [ products, setProducts ] = useState([]);

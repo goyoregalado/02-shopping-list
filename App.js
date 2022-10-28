@@ -1,24 +1,35 @@
 import { useState } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View, Button} from 'react-native';
 import ProductInput from './components/ProductInput';
 import ListItem from './components/ListItem';
 
 export default function App() {
+  const [productName, setProductName] = useState({
+    id:"",
+    name:"",
+    quantity:1,
+    bought:0,
+    type:"types"
+});
+
   const [ products, setProducts ] = useState([]);
 
   const addProductHandler = (productName) => {
     setProducts(() => [...products, productName]);
   }
-
+  
   const removeProductHandler = (productName) => {
     console.log(productName);
     setProducts(() => products.filter((product) => product !== productName));
   }
+  const removeAll =()=>{
+    setProducts([])
+  }
 
   return (
     <View style={styles.container}>
-      <ProductInput onProductAdd={addProductHandler}/>
-
+      <ProductInput onProductAdd={addProductHandler} productName={productName} setProducts={setProductName}/>
+        
         <ScrollView style={styles.productScroll}>
         <View style={styles.productList}>
           { 
@@ -28,9 +39,16 @@ export default function App() {
                 <ListItem 
                   key={idx+product} 
                   productName={product} 
+                  setProductName={setProductName}
                   onProductRemove={removeProductHandler}/>
               ))
           }
+        </View>
+        <View>
+        <Button
+                style={styles.addButton}
+                title="borrar"
+                onPress={removeAll} />
         </View>
         </ScrollView>
     </View>

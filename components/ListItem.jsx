@@ -7,12 +7,11 @@ import {
 import { useState } from 'react';
 const ListItem = ({ productName, onProductRemove, setProductName }) => {
     const [ port , setport] = useState(0)
-    const changeImage = () =>{
+    const changeImage = () => {
         let imagen
         switch (productName.type){
             case "fruit":
               return require('../assets/fruta.jpg')
-                
             case "vegetable":
                 return require('../assets/verdura.jpg')
             case "bakery":
@@ -30,7 +29,7 @@ const ListItem = ({ productName, onProductRemove, setProductName }) => {
 
             return{
                 ...productName,
-                bought:value
+                bought: value
             } 
         }) 
         setport(value)
@@ -44,12 +43,14 @@ const ListItem = ({ productName, onProductRemove, setProductName }) => {
     {
         
         port == 0 ?
+
         <View style={styles.listItem}>
             <Pressable style={{flexDirection: 'row'}} onPress={() => seleInput(1)}>
                 <Image style={styles.productImage} source={changeImage()} />    
             </Pressable>
             <Text style={styles.productName}>cantidad: {productName.quantity} {productName.name}</Text>
         </View>
+
         :<View style={styles.listItemSelect}>
             <Pressable style={{flexDirection: 'row'}} onPress={() => seleInput(0)}>
                 <Image style={styles.productImage} source={changeImage()} ></Image>     

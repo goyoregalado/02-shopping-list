@@ -1,47 +1,124 @@
 import { useState } from 'react';
-
+import SelectDropdown from 'react-native-select-dropdown';
+import NumericInput from 'react-native-numeric-input';
 import { Button, StyleSheet, TextInput, View } from 'react-native';
+const countries = ["fruit", "vegetable", "bakery", "fish", "meat"]
+const ProductInput = ({ onProductAdd, productName, setProducts }) => {
+    
 
-const ProductInput = ({ onProductAdd }) => {
-    const [productName, setProductName] = useState('');
+    const changeNameHandler = (value) => {
 
-    const changeTextHandler = (value) => {
-        setProductName(value);
+        setProducts((productName)=>{
+            return{
+                ...productName,
+                name:value.trim()
+            }
+        });
+
     }
 
+
+    const changeTypeHandler = (value) =>{
+  
+        setProducts((productName)=>{
+            return{
+                ...productName,
+                type:value
+            }
+        })
+    }
+    
+
+    const changeNumericHandler =(value)=>{
+        setProducts((productName)=>{
+            return{
+                ...productName,
+                quantity:value
+            }
+        })
+    }
+
+    
     const addProductHandler = () => {
-        const sanitizedName = productName.trim()
-        if (sanitizedName !== '') {
-            onProductAdd(sanitizedName);
+        
+        if (productName.name !== undefined) {
+            onProductAdd(productName);
         }
-        setProductName('');
+        setProducts((productName)=>{
+            return{
+                ...productName,
+                name:'',
+                quantity:1,
+                type:productName.type
+            }
+        });
     }
 
     return (
         <View style={styles.productInput}>
-            <TextInput style={styles.productName}
-                placeholder='Introduzca un producto'
-                keyboardType="default"
-                onChangeText={changeTextHandler}
-                value={productName} />
-            <Button
+            <View style={styles.productLine}>
+                <TextInput style={styles.productName}
+                    placeholder='Introduzca un producto'
+                    keyboardType="default"
+                    onChangeText={changeNameHandler}
+                    value={productName.name} />
+
+                <SelectDropdown
+                    buttonStyle={styles.select}
+                    defaultButtonText={productName.type}
+                    
+                    data={countries}
+                    onSelect={(selectedItem, index) => {
+                        changeTypeHandler(selectedItem)
+                    }}
+                    buttonTextAfterSelection={() => {
+                        // text represented after item is selected
+                        // if data array is an array of objects then return selectedItem.property to render after item is selected
+                        return productName.type
+                    }}
+                    rowTextForSelection={(item, index) => {
+                        // text represented for each item in dropdown
+                        // if data array is an array of objects then return item.property to represent item in dropdown
+                        return item
+                    }}
+                />      
+            </View>
+            <View style={styles.secondLine}>
+                <NumericInput type='up-down' editable={false} initValue={productName.quantity} onChange={value => changeNumericHandler(value)} />
+                <Button
                 style={styles.addButton}
                 title="Añadir"
                 onPress={addProductHandler} />
+            </View>
+                
+            
+               
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     productInput: {
-        flexDirection: 'row',
+        flexDirection: 'column',
         justifyContent: 'space-around',
         alignItems: 'center',
         backgroundColor: "#ad1457",
         width: '80%',
-        height: 80,
+        height: 140,
         borderRadius: 5,
         padding: 10
+    },
+    productLine:{
+        flexDirection:"row",
+        height:"40%"
+    },
+    secondLine:{
+        flexDirection: 'row',
+        alignContent: 'space-between'
+    },
+    select:{
+        height:40,
+        width:100
     },
     productName: {
         flex: 4,

@@ -2,16 +2,27 @@ import {
     Image,
     Pressable, 
     StyleSheet, 
-    Text, 
+    Text,
     View } from 'react-native';
+import { useState } from 'react';
+const ListItem = ({ productName, onProductRemove, setProductName }) => {
+    const [ port , setport] = useState(0)
 
-const ListItem = ({ productName, onProductRemove }) => {
-    let port = 0
-    const onProductSelect=()=>{
-        console.log(port)
-        port = 1
+
+    const seleInput = (value) =>{
+        
+        setProductName((productName)=>{
+
+            return{
+                ...productName,
+                bought:value
+            } 
+        }) 
+        setport(value)
+        console.log(productName)
+        
     }
-    
+
   return (
     <View>
 
@@ -19,7 +30,7 @@ const ListItem = ({ productName, onProductRemove }) => {
         
         port == 0 ?
         <View style={styles.listItem}>
-            <Pressable style={{flexDirection: 'row'}} onPress={() => onProductRemove(productName)}>
+            <Pressable style={{flexDirection: 'row'}} onPress={() => seleInput(1)}>
 
                 {
                     productName.type === "fruit"? <Image style={styles.productImage} source={require('../assets/fruta.jpg')} />: null     
@@ -43,7 +54,7 @@ const ListItem = ({ productName, onProductRemove }) => {
             
         </View>
         :<View style={styles.listItemSelect}>
-            <Pressable style={{flexDirection: 'row'}} onPress={() => onProductRemove(productName)}>
+            <Pressable style={{flexDirection: 'row'}} onPress={() => seleInput(0)}>
 
                 {
                     productName.type === "fruit"? <Image style={styles.productImage} source={require('../assets/fruta.jpg')} />: null     
@@ -79,7 +90,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: 'white',
         borderRadius: 5,
-        width: '60%',
+        width: 300,
         height:62,
         marginBottom: 5,
         paddingHorizontal: 5
@@ -90,7 +101,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: 'grey',
         borderRadius: 5,
-        width: '60%',
+        width: 300,
         height:62,
         marginBottom: 5,
         paddingHorizontal: 5

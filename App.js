@@ -7,9 +7,9 @@ export default function App() {
   const [productName, setProductName] = useState({
     id:"",
     name:"",
-    quantity:"",
-    bought:"",
-    type:""
+    quantity:1,
+    bought:0,
+    type:"types"
 });
 
   const [ products, setProducts ] = useState([]);
@@ -17,7 +17,7 @@ export default function App() {
   const addProductHandler = (productName) => {
     setProducts(() => [...products, productName]);
   }
-
+  
   const removeProductHandler = (productName) => {
     console.log(productName);
     setProducts(() => products.filter((product) => product !== productName));
@@ -39,6 +39,7 @@ export default function App() {
                 <ListItem 
                   key={idx+product} 
                   productName={product} 
+                  setProductName={setProductName}
                   onProductRemove={removeProductHandler}/>
               ))
           }

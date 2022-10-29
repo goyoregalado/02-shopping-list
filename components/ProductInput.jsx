@@ -1,11 +1,15 @@
 import { useState } from 'react';
 import SelectDropdown from 'react-native-select-dropdown';
 import NumericInput from 'react-native-numeric-input';
-import { Button, StyleSheet, TextInput, View } from 'react-native';
-const countries = ["fruit", "vegetable", "bakery", "fish", "meat"]
+import { StyleSheet, TextInput, View, TouchableOpacity,Text} from 'react-native';
+
+
+
+
 const ProductInput = ({ onProductAdd, productName, setProducts }) => {
     
-
+    const countries = ["fruit", "vegetable", "bakery", "fish", "meat"]
+    let disabled
     const changeNameHandler = (value) => {
 
         setProducts((productName)=>{
@@ -41,9 +45,10 @@ const ProductInput = ({ onProductAdd, productName, setProducts }) => {
     
     const addProductHandler = () => {
         
-        if (productName.name !== undefined) {
+        
             onProductAdd(productName);
-        }
+        
+
         setProducts((productName)=>{
             return{
                 ...productName,
@@ -53,7 +58,20 @@ const ProductInput = ({ onProductAdd, productName, setProducts }) => {
             }
         });
     }
-
+    
+    const disableHandler = () =>{
+        if(productName.type !== 'tipo' && productName.name !== ''){
+            
+            
+            return false
+        }else{
+            
+           
+            
+            return true
+        }
+    }
+    
     return (
         <View style={styles.productInput}>
             <View style={styles.productLine}>
@@ -65,35 +83,49 @@ const ProductInput = ({ onProductAdd, productName, setProducts }) => {
 
                 <SelectDropdown
                     buttonStyle={styles.select}
+                    buttonTextStyle={styles.textButon}
                     defaultButtonText={productName.type}
                     
                     data={countries}
                     onSelect={(selectedItem, index) => {
                         changeTypeHandler(selectedItem)
                     }}
+
                     buttonTextAfterSelection={() => {
-                        // text represented after item is selected
-                        // if data array is an array of objects then return selectedItem.property to render after item is selected
+                    
                         return productName.type
                     }}
+
                     rowTextForSelection={(item, index) => {
-                        // text represented for each item in dropdown
-                        // if data array is an array of objects then return item.property to represent item in dropdown
+                        
                         return item
                     }}
                 />      
             </View>
             <View style={styles.secondLine}>
-                <NumericInput type='up-down' editable={false} initValue={productName.quantity} onChange={value => changeNumericHandler(value)} />
-                <Button
-                style={styles.addButton}
-                title="Añadir"
-                onPress={addProductHandler} />
-            </View>
+                <NumericInput type='up-down' 
+                upDownButtonsBackgroundColor='#f8bbd0'
+                totalHeight={40}
+                totalWidth={100}
+                iconStyle={{color:'white'}}
+                editable={false} 
+                initValue={productName.quantity} 
+                onChange={value => changeNumericHandler(value)} />
+                {
+                    (disableHandler())===false
+                    ?<TouchableOpacity style={styles.addButton} disabled={disableHandler()} onPress={addProductHandler}>
+                        <Text style={styles.textButon}>Añadir</Text>
+                     </TouchableOpacity>
+                    :<TouchableOpacity style={styles.addButtonDisabled} disabled={disableHandler()} onPress={addProductHandler}>
+                        <Text style={styles.textButonDisable}>Añadir</Text>
+                     </TouchableOpacity>
+                }
+                    
                 
-            
-               
+            </View>                     
+    
         </View>
+
     );
 }
 
@@ -102,31 +134,61 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'space-around',
         alignItems: 'center',
-        backgroundColor: "#ad1457",
-        width: '80%',
+        backgroundColor: "#fff3e0",
+        width: '100%',
         height: 140,
-        borderRadius: 5,
         padding: 10
     },
     productLine:{
         flexDirection:"row",
-        height:"40%"
+        justifyContent:'space-around',
+        width:'100%'
+        
     },
     secondLine:{
+        width:'100%',
         flexDirection: 'row',
-        alignContent: 'space-between'
+        justifyContent: 'space-around'
+        
     },
     select:{
         height:40,
-        width:100
+        width:100,
+        borderRadius:4,
+        backgroundColor:'#f8bbd0',
+        
     },
     productName: {
-        flex: 4,
-        color: 'white'
+        width:'30%',
+        color: 'white',
+        backgroundColor:'#f8bbd0',
+        borderRadius:4
     },
     addButton: {
-        flex: 1
+        justifyContent:'center',
+        width: 100,
+        height:40,
+        backgroundColor: '#f8bbd0',
+        borderRadius:4
+    },
+    addButtonDisabled:{
+        justifyContent:'center',
+        width: 100,
+        height:40,
+        backgroundColor: '#c48b9f',
+        borderRadius:4
+    },
+    textButon:{
+        textAlign:'center',
+        color: 'white'
+       
+    },
+    textButonDisable:{
+        textAlign:'center',
+        color:'grey'
     }
+
+    
 });
 
 export default ProductInput;

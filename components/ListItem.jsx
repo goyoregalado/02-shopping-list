@@ -51,11 +51,11 @@ const ListItem = ({ productName, onProductRemove, setProductName }) => {
             <Text style={styles.productName}>cantidad: {productName.quantity} {productName.name}</Text>
         </View>
 
-        :<View style={styles.listItemSelect}>
+        :<View style={styles.listItemOnBought}>
             <Pressable style={{flexDirection: 'row'}} onPress={() => seleInput(0)}>
                 <Image style={styles.productImage} source={changeImage()} ></Image>     
             </Pressable>
-            <Text style={styles.productNameSelect}>cantidad: {productName.quantity} {productName.name}</Text>
+            <Text style={styles.productNameOnBought}>cantidad: {productName.quantity} {productName.name}</Text>
         
         </View>
     }
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
         marginBottom: 5,
         paddingHorizontal: 5
     },
-    listItemSelect: {
+    listItemOnBought: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -92,6 +92,10 @@ const styles = StyleSheet.create({
         height: 50,
         borderRadius:50
     },
+    productNameOnBought:{
+        textDecorationLine:'line-through'
+    },
+    
     productName: {
         fontSize: 18,
         textAlign: 'center',

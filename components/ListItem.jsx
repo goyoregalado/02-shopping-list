@@ -5,7 +5,7 @@ import {
     Text,
     View } from 'react-native';
 import { useState } from 'react';
-const ListItem = ({ productName, onProductRemove, setProductName }) => {
+const ListItem = ({ productName,  setProductName }) => {
     const [ port , setport] = useState(0)
     const changeImage = () => {
         let imagen
@@ -44,18 +44,18 @@ const ListItem = ({ productName, onProductRemove, setProductName }) => {
         
         port == 0 ?
 
-        <View style={styles.listItem}>
+        <View style={styles.listItem} >
             <Pressable style={{flexDirection: 'row'}} onPress={() => seleInput(1)}>
                 <Image style={styles.productImage} source={changeImage()} />    
             </Pressable>
-            <Text style={styles.productName}>cantidad: {productName.quantity} {productName.name}</Text>
+            <Text style={styles.productName}>{productName.name} x {productName.quantity}</Text>
         </View>
 
         :<View style={styles.listItemOnBought}>
             <Pressable style={{flexDirection: 'row'}} onPress={() => seleInput(0)}>
                 <Image style={styles.productImage} source={changeImage()} ></Image>     
             </Pressable>
-            <Text style={styles.productNameOnBought}>cantidad: {productName.quantity} {productName.name}</Text>
+            <Text style={styles.productNameOnBought}>  {productName.name} x {productName.quantity}</Text>
         
         </View>
     }
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: 'white',
+        backgroundColor: "#fff3e0",
         borderRadius: 5,
         width: 300,
         height:62,
@@ -93,6 +93,8 @@ const styles = StyleSheet.create({
         borderRadius:50
     },
     productNameOnBought:{
+        fontSize:18,
+        textAlign:'center',
         textDecorationLine:'line-through'
     },
     

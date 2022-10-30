@@ -83,7 +83,7 @@ const ProductInput = ({ onProductAdd }) => {
                     valueType='integer'
                     initValue={productQuantity}
                     minValue={1}
-                    maxValue={10}
+                    maxValue={99}
                     onChange={value => changeQuantityHandler(value)}
                     editable={false}
                 />
@@ -103,9 +103,9 @@ const ProductInput = ({ onProductAdd }) => {
 const styles = StyleSheet.create({
     inputOptionsStyle: {
         flexDirection: 'column',
-        justifyContent: 'space-evenly',
-        alignItems: 'stretch',
-        width: '80%'
+        justifyContent: 'center',
+        width:'80%',
+        marginTop: 20
     },
     productInput: {
         alignItems: 'center',

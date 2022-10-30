@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import ProductInput from './components/ProductInput';
 import ListItem from './components/ListItem';
+import ClearButton from './components/ClearButton';
 import uuid from 'react-native-uuid';
 
 export default function App() {
@@ -22,7 +23,11 @@ export default function App() {
 
   const removeProductHandler = (id) => {
     setProducts(() => products.filter( product => product.id !== id));
-  }
+  };
+
+  const removeAllProductsHandler = () => {
+    setProducts(() => []);
+  };
 
   return (
     <View style={styles.container}>
@@ -44,6 +49,10 @@ export default function App() {
         }
       </View>
       </ScrollView>
+      <ClearButton 
+        products={products}
+        onProductsRemove={removeAllProductsHandler}
+      />
     </View>
   );
 }

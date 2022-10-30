@@ -82,17 +82,23 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         width: '80%',
         marginBottom: 5,
-        paddingHorizontal: 5
+        paddingHorizontal: 5,
+        borderRadius: 8,
+        borderWidth: 1,
+        borderColor: '#000'
     },
     listItemBought : {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: 'lawngreen',
+        backgroundColor: '#1faa00',
         borderRadius: 5,
         width: '80%',
         marginBottom: 5,
-        paddingHorizontal: 5
+        paddingHorizontal: 5,
+        borderRadius: 8,
+        borderWidth: 1,
+        borderColor: '#000'
     },
     productImage: {
         width: 50,

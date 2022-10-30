@@ -50,81 +50,97 @@ const ProductInput = ({ onProductAdd }) => {
     };
 
     return (
-        <View style={styles.inputOptionsStyle}>
-            <View style={styles.productInput}>
-                <TextInput style={styles.productName}
-                    placeholder='Enter a product'
-                    keyboardType="default"
-                    onChangeText={changeTextHandler}
-                    value={productName} />
+        <View style={styles.inputOptionsStyles}>
+            <View style={styles.inputOptionsStyle1}>
+                <View style={styles.productInput}>
+                    <TextInput
+                        placeholder='Enter a product'
+                        keyboardType="default"
+                        onChangeText={changeTextHandler}
+                        value={productName} />
+                </View>
+                <View>
+                    <SelectDropdown
+                        data={productTypes}
+                        onSelect={(selectedItem) => {
+                            changeTypeHandler(selectedItem);
+                        }}
+                        defaultButtonText={'Category...'}
+                        buttonTextAfterSelection={() => {
+                            return productType;
+                        }}
+                        rowTextForSelection={(item) => {
+                            return item;
+                        }}
+                        buttonStyle={styles.dropdownBtnStyle}
+                        buttonTextStyle={styles.dropdownBtnTxtStyle}
+                        dropdownStyle={styles.dropdownDropdownStyle}
+                        rowStyle={styles.dropdownRowStyle}/>
+                </View>
             </View>
-            <View>
-                <SelectDropdown
-                    data={productTypes}
-                    onSelect={(selectedItem) => {
-                        changeTypeHandler(selectedItem);
-                    }}
-                    defaultButtonText={'Category...'}
-                    buttonTextAfterSelection={() => {
-                        return productType;
-                    }}
-                    rowTextForSelection={(item) => {
-                        return item;
-                    }}
-                    buttonStyle={styles.dropdownBtnStyle}
-                    buttonTextStyle={styles.dropdownBtnTxtStyle}
-                    dropdownStyle={styles.dropdownDropdownStyle}
-                    rowStyle={styles.dropdownRowStyle}
-            />
-            </View>
-            <View style={styles.productInput}>
-                <NumericInput 
-                    type='plus-minus'
-                    valueType='integer'
-                    initValue={productQuantity}
-                    minValue={1}
-                    maxValue={99}
-                    onChange={value => changeQuantityHandler(value)}
-                    editable={false}
-                />
-            </View>
-            <View>
-                <Button
-                    style={styles.addButton}
-                    title="Add"
-                    onPress={addProductHandler}
-                    disabled={isDisabled()}
-                />
+            <View style={styles.inputOptionsStyle2}>
+                <View style={styles.numberInput}>
+                    <NumericInput 
+                        type='plus-minus'
+                        valueType='integer'
+                        initValue={productQuantity}
+                        minValue={1}
+                        maxValue={99}
+                        onChange={value => changeQuantityHandler(value)}
+                        editable={false}
+                    />
+                </View>
+                <View>
+                    <Button
+                        style={styles.addButton}
+                        title="Add"
+                        onPress={addProductHandler}
+                        disabled={isDisabled()}
+                    />
+                </View>
             </View>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    inputOptionsStyle: {
+    inputOptionsStyles: {
         flexDirection: 'column',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
+        alignItems: 'center',
         width:'80%',
-        marginTop: 20
+        marginTop: 15
+    },
+    inputOptionsStyle1: {
+        flexDirection: 'column',
+        width:'80%',
+        marginBottom: 10
+    },
+    inputOptionsStyle2: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+        width:'80%'
     },
     productInput: {
-        alignItems: 'center',
-        backgroundColor: "#73e8ff",
+        backgroundColor: "#64dd17",
+        borderRadius: 8,
+        borderWidth: 1,
+        borderColor: '#000',
         height: 50,
-        borderRadius: 5,
-        padding: 10
+        width: '100%',
+        padding: 10,
+        marginBottom: 5
     },
-    productName: {
-        flex: 4,
-        color: 'black'
-    },
-    addButton: {
-        flex: 1
+    numberInput: {
+        alignItems: 'center',
+        height: 50
     },
     dropdownBtnStyle: {
         width: '100%',
         height: 50,
-        backgroundColor: '#FFF',
+        backgroundColor: 'white',
         borderRadius: 8,
         borderWidth: 1,
         borderColor: '#444',

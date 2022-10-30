@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     width: '100%',
     marginTop: 30,
-    backgroundColor: '#fdff58',
+    backgroundColor: '#9cff57',
 
   },
   productList: {

@@ -5,7 +5,7 @@ import {
     Text, 
     View } from 'react-native';
 
-const ListItem = ({productId, productName, productQuantity, productType, onProductRemove }) => {
+const ListItem = ({productId, productName, productQuantity, productType, isBought, onProductRemove, onBought }) => {
 
     const handleImage = (type) => {
         let result;
@@ -40,13 +40,35 @@ const ListItem = ({productId, productName, productQuantity, productType, onProdu
         return result;
     }
 
+    const handleBoughtTextStyle = () => {
+
+        if (isBought) {
+            return styles.productBought;
+        }
+
+        return styles.productInfo;
+    };
+
+    const handleBoughtListStyle = () => {
+
+        if (isBought) {
+            return styles.listItemBought
+        }
+
+        return styles.listItem;
+    };
+
   return (
-        <View style={styles.listItem}>
+        <View style={handleBoughtListStyle()}>
             <Pressable style={{flexDirection: 'row'}} onPress={() => onProductRemove(productId)}>
                 <Image style={styles.productImage} source={handleImage(productType)} />
             </Pressable>
-            <Text style={styles.productName}>{productName}</Text>
-            <Text style={styles.productName}>x{productQuantity}</Text>
+            <Pressable style={{flexDirection: 'row'}} onPress={() => onBought(productId, isBought)}>
+                <Text style={handleBoughtTextStyle()}>{productName}</Text>
+            </Pressable>
+            <Pressable style={{flexDirection: 'row'}} onPress={() => onBought(productId, isBought)}>
+                <Text style={handleBoughtTextStyle()}>x{productQuantity}</Text>
+            </Pressable>
         </View>
     )
 }
@@ -62,12 +84,29 @@ const styles = StyleSheet.create({
         marginBottom: 5,
         paddingHorizontal: 5
     },
+    listItemBought : {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        backgroundColor: 'lawngreen',
+        borderRadius: 5,
+        width: '80%',
+        marginBottom: 5,
+        paddingHorizontal: 5
+    },
     productImage: {
         width: 50,
         height: 50
     },
-    productName: {
+    productInfo: {
         fontSize: 18,
+        textAlign: 'center',
+        alignContent: 'center'
+    },
+    productBought: {
+        fontSize: 18,
+        textDecorationLine: 'line-through',
+        textDecorationStyle: 'solid',
         textAlign: 'center',
         alignContent: 'center'
     }

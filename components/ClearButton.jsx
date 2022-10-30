@@ -14,7 +14,6 @@ const ClearButton = ({ products, onProductsRemove }) => {
     return (
             <View style={styles.buttonAlign}>
                 <Button
-                    style={styles.buttonStyle}
                     title="Clear"
                     onPress={onProductsRemove}
                     disabled={isDisabled()}
@@ -24,9 +23,6 @@ const ClearButton = ({ products, onProductsRemove }) => {
 };
 
 const styles = StyleSheet.create({
-    buttonStyle: {
-        backgroundColor: 'red'
-    },
     buttonAlign: {
         flexDirection: 'row',
         justifyContent: 'center',

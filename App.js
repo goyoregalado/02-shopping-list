@@ -29,6 +29,20 @@ export default function App() {
     setProducts(() => []);
   };
 
+  const boughtHandler = (id, boughtValue) => {
+    const newProduct = products.map( product => {
+      if (product.id === id) {
+        return {
+          ...product,
+          bought: !boughtValue
+        }
+      }
+      return product;
+    });
+
+    setProducts(newProduct);
+  };
+
   return (
     <View style={styles.container}>
       <ProductInput onProductAdd={addProductHandler}/>
@@ -43,8 +57,10 @@ export default function App() {
                 productId={product.id} 
                 productName={product.name}
                 productQuantity={product.quantity}
-                productType={product.type} 
-                onProductRemove={removeProductHandler}/>
+                productType={product.type}
+                isBought={product.bought}
+                onProductRemove={removeProductHandler}
+                onBought={boughtHandler}/>
             ))
         }
       </View>

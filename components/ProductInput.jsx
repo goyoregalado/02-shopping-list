@@ -1,4 +1,6 @@
 
+import 'react-native-get-random-values';
+import { v4 as uuidv4 } from 'uuid';
 import SelectDropdown from 'react-native-select-dropdown';
 import NumericInput from 'react-native-numeric-input';
 import { StyleSheet, TextInput, View, TouchableOpacity,Text} from 'react-native';
@@ -6,15 +8,16 @@ import { StyleSheet, TextInput, View, TouchableOpacity,Text} from 'react-native'
 
 
 
-const ProductInput = ({ onProductAdd, productName, setProducts }) => {
+
+const ProductInput = ({ onProductAdd, product, setProducts }) => {
     
     const countries = ["fruit", "vegetable", "bakery", "fish", "meat"]
-    let disabled
+
     const changeNameHandler = (value) => {
 
-        setProducts((productName)=>{
+        setProducts((product)=>{
             return{
-                ...productName,
+                ...product,
                 name:value.trim()
             }
         });
@@ -24,9 +27,9 @@ const ProductInput = ({ onProductAdd, productName, setProducts }) => {
 
     const changeTypeHandler = (value) =>{
   
-        setProducts((productName)=>{
+        setProducts((product)=>{
             return{
-                ...productName,
+                ...product,
                 type:value
             }
         })
@@ -34,9 +37,9 @@ const ProductInput = ({ onProductAdd, productName, setProducts }) => {
     
 
     const changeNumericHandler =(value)=>{
-        setProducts((productName)=>{
+        setProducts((product)=>{
             return{
-                ...productName,
+                ...product,
                 quantity:value
             }
         })
@@ -45,29 +48,31 @@ const ProductInput = ({ onProductAdd, productName, setProducts }) => {
     
     const addProductHandler = () => {
         
-        
-            onProductAdd(productName);
-        
-
-        setProducts((productName)=>{
+        setProducts((product)=>{
             return{
-                ...productName,
+                ...product,
+                id:uuidv4()
+            }
+        })
+        
+        onProductAdd(product);
+        
+        setProducts((product)=>{
+            return{
+                ...product,
                 name:'',
                 quantity:1,
-                type:productName.type
+                type:product.type
             }
         });
     }
     
     const disableHandler = () =>{
-        if(productName.type !== 'tipo' && productName.name !== ''){
-            
-            
+        if(product.type !== 'tipo' && product.name !== ''){
+
             return false
         }else{
-            
-           
-            
+
             return true
         }
     }
@@ -75,17 +80,17 @@ const ProductInput = ({ onProductAdd, productName, setProducts }) => {
     return (
         <View style={styles.productInput}>
             <View style={styles.productLine}>
-                <TextInput style={styles.productName}
+                <TextInput style={styles.product}
                     placeholder='Introduzca un producto'
                     keyboardType="default"
                     onChangeText={changeNameHandler}
-                    value={productName.name} />
+                    value={product.name} />
 
                 <SelectDropdown
                     buttonStyle={styles.select}
                     buttonTextStyle={styles.textButon}
-                    defaultButtonText={productName.type}
-                    
+                    defaultButtonText={product.type}
+                    dropdownIconPosition={'right'}
                     data={countries}
                     onSelect={(selectedItem, index) => {
                         changeTypeHandler(selectedItem)
@@ -93,7 +98,7 @@ const ProductInput = ({ onProductAdd, productName, setProducts }) => {
 
                     buttonTextAfterSelection={() => {
                     
-                        return productName.type
+                        return product.type
                     }}
 
                     rowTextForSelection={(item, index) => {
@@ -103,14 +108,18 @@ const ProductInput = ({ onProductAdd, productName, setProducts }) => {
                 />      
             </View>
             <View style={styles.secondLine}>
+
                 <NumericInput type='up-down' 
                 upDownButtonsBackgroundColor='#f8bbd0'
                 totalHeight={40}
                 totalWidth={100}
+                maxValue={20}
+                minValue={1}
                 iconStyle={{color:'white'}}
                 editable={false} 
-                initValue={productName.quantity} 
+                initValue={product.quantity} 
                 onChange={value => changeNumericHandler(value)} />
+
                 {
                     (disableHandler())===false
                     ?<TouchableOpacity style={styles.addButton} disabled={disableHandler()} onPress={addProductHandler}>
@@ -158,7 +167,7 @@ const styles = StyleSheet.create({
         backgroundColor:'#f8bbd0',
         
     },
-    productName: {
+    product: {
         width:'30%',
         color: 'white',
         backgroundColor:'#f8bbd0',

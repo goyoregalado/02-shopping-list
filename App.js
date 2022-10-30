@@ -5,7 +5,7 @@ import ListItem from './components/ListItem';
 
 
 export default function App() {
-  const [productName, setProductName] = useState({
+  const [product, setproduct] = useState({
     id:"",
     name:"",
     quantity:1,
@@ -15,13 +15,14 @@ export default function App() {
 
   const [ products, setProducts ] = useState([]);
 
-  const addProductHandler = (productName) => {
-    setProducts(() => [...products, productName]);
+  const addProductHandler = (product) => {
+    console.log(product.id)
+    setProducts(() => [...products, product]);
   }
   
-  const removeProductHandler = (productName) => {
-    console.log(productName);
-    setProducts(() => products.filter((product) => product !== productName));
+  const removeProductHandler = (product) => {
+    console.log(product.id);
+    setProducts(() => products.filter((product) => product !== product));
   }
   const removeAll = ()=>{
     setProducts([])
@@ -29,7 +30,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <ProductInput onProductAdd={addProductHandler} productName={productName} setProducts={setProductName}/>
+      <ProductInput onProductAdd={addProductHandler} product={product} setProducts={setproduct}/>
       <View style={styles.body}>
       <ScrollView style={styles.productScroll}>
         <View style={styles.productList}>
@@ -38,9 +39,9 @@ export default function App() {
               ? <Text style={styles.center}>Aún no hay productos</Text> 
               : products.map((product, idx) => (
                 <ListItem 
-                  key={idx+product} 
-                  productName={product} 
-                  setProductName={setProductName}
+                  key={product.id} 
+                  product={product} 
+                  setproduct={setproduct}
                   onProductRemove={removeProductHandler}/>
                   
               ))
@@ -86,7 +87,8 @@ const styles = StyleSheet.create({
     width: 100,
     height:40,
     backgroundColor: '#f8bbd0',
-    borderRadius:4
+    borderRadius:4,
+    marginLeft:100
   },
   textButon:{
     textAlign:'center',

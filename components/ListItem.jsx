@@ -5,11 +5,11 @@ import {
     Text,
     View } from 'react-native';
 import { useState } from 'react';
-const ListItem = ({ productName,  setProductName }) => {
+const ListItem = ({ product,  setproduct }) => {
     const [ port , setport] = useState(0)
     const changeImage = () => {
-        let imagen
-        switch (productName.type){
+        
+        switch (product.type){
             case "fruit":
               return require('../assets/fruta.jpg')
             case "vegetable":
@@ -24,16 +24,15 @@ const ListItem = ({ productName,  setProductName }) => {
     }
 
     const seleInput = (value) =>{
-        
-        setProductName((productName)=>{
+        setport(value)
+        setproduct((product)=>{
 
             return{
-                ...productName,
+                ...product,
                 bought: value
             } 
         }) 
-        setport(value)
-        console.log(productName)
+        
         
     }
 
@@ -48,14 +47,14 @@ const ListItem = ({ productName,  setProductName }) => {
             <Pressable style={{flexDirection: 'row'}} onPress={() => seleInput(1)}>
                 <Image style={styles.productImage} source={changeImage()} />    
             </Pressable>
-            <Text style={styles.productName}>{productName.name} x {productName.quantity}</Text>
+            <Text style={styles.product}>{product.name} x {product.quantity}</Text>
         </View>
 
-        :<View style={styles.listItemOnBought}>
+        :<View style={styles.listItemOnBought} >
             <Pressable style={{flexDirection: 'row'}} onPress={() => seleInput(0)}>
                 <Image style={styles.productImage} source={changeImage()} ></Image>     
             </Pressable>
-            <Text style={styles.productNameOnBought}>  {productName.name} x {productName.quantity}</Text>
+            <Text style={styles.productOnBought}>  {product.name} x {product.quantity}</Text>
         
         </View>
     }
@@ -92,13 +91,13 @@ const styles = StyleSheet.create({
         height: 50,
         borderRadius:50
     },
-    productNameOnBought:{
+    productOnBought:{
         fontSize:18,
         textAlign:'center',
         textDecorationLine:'line-through'
     },
     
-    productName: {
+    product: {
         fontSize: 18,
         textAlign: 'center',
         alignContent: 'center',

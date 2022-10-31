@@ -36,8 +36,8 @@ const ProductInput = ({ onProductAdd, product, setProducts }) => {
     }
     
 
-    const changeNumericHandler =(value)=>{
-        setProducts((product)=>{
+    const changeNumericHandler = (value)=>{
+        setProducts((product) => {
             return{
                 ...product,
                 quantity:value
@@ -67,7 +67,7 @@ const ProductInput = ({ onProductAdd, product, setProducts }) => {
         });
     }
     
-    const disableHandler = () =>{
+    const disableHandler = () => {
         if(product.type !== 'tipo' && product.name !== ''){
 
             return false
@@ -121,7 +121,7 @@ const ProductInput = ({ onProductAdd, product, setProducts }) => {
                 onChange={value => changeNumericHandler(value)} />
 
                 {
-                    (disableHandler())===false
+                    (disableHandler()) === false
                     ?<TouchableOpacity style={styles.addButton} disabled={disableHandler()} onPress={addProductHandler}>
                         <Text style={styles.textButon}>Añadir</Text>
                      </TouchableOpacity>

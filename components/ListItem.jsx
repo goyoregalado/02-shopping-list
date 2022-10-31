@@ -6,7 +6,7 @@ import {
     View } from 'react-native';
 import { useState } from 'react';
 const ListItem = ({ product,  setproduct }) => {
-    const [ port , setport] = useState(0)
+    const [ bougth , setBought] = useState(0)
     const changeImage = () => {
         
         switch (product.type){
@@ -23,8 +23,8 @@ const ListItem = ({ product,  setproduct }) => {
         }
     }
 
-    const seleInput = (value) =>{
-        setport(value)
+    const selectBought = (value) =>{
+        setBought(value)
         setproduct((product)=>{
 
             return{
@@ -41,17 +41,17 @@ const ListItem = ({ product,  setproduct }) => {
 
     {
         
-        port == 0 ?
+        bougth == 0 ?
 
         <View style={styles.listItem} >
-            <Pressable style={{flexDirection: 'row'}} onPress={() => seleInput(1)}>
+            <Pressable style={{flexDirection: 'row'}} onPress={() => selectBought(1)}>
                 <Image style={styles.productImage} source={changeImage()} />    
             </Pressable>
             <Text style={styles.product}>{product.name} x {product.quantity}</Text>
         </View>
 
         :<View style={styles.listItemOnBought} >
-            <Pressable style={{flexDirection: 'row'}} onPress={() => seleInput(0)}>
+            <Pressable style={{flexDirection: 'row'}} onPress={() => selectBought(0)}>
                 <Image style={styles.productImage} source={changeImage()} ></Image>     
             </Pressable>
             <Text style={styles.productOnBought}>  {product.name} x {product.quantity}</Text>

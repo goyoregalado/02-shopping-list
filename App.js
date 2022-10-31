@@ -24,8 +24,17 @@ export default function App() {
     console.log(product.id);
     setProducts(() => products.filter((product) => product !== product));
   }
+
   const removeAll = ()=>{
     setProducts([])
+  }
+
+  const isDisable = () =>{
+    if (products.length===0){
+      return true
+    }else{
+      return false
+    }
   }
 
   return (
@@ -49,10 +58,14 @@ export default function App() {
         </View>
         {
         products.length===0 
-          ? null
+          ? <View>
+              <TouchableOpacity style={styles.clearButtonDisabled} disabled={isDisable()} onPress={removeAll}>
+              <Text style={styles.textButon}>clear</Text>
+            </TouchableOpacity>
+          </View>
           :<View>
-            <TouchableOpacity style={styles.addButton} onPress={removeAll}>
-              <Text style={styles.textButon}>Remove all</Text>
+            <TouchableOpacity style={styles.clearButton} disabled={isDisable()} onPress={removeAll}>
+              <Text style={styles.textButon}>clear</Text>
             </TouchableOpacity>
           </View>
         }
@@ -82,17 +95,25 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center'
   },
-  addButton: {
+  clearButton: {
     justifyContent:'center',
     width: 100,
     height:40,
     backgroundColor: '#f8bbd0',
     borderRadius:4,
-    marginLeft:100
+    marginLeft:'35%'
+  },
+  clearButtonDisabled:{
+    justifyContent:'center',
+    width: 100,
+    height:40,
+    backgroundColor: '#c48b9f',
+    borderRadius:4,
+    marginLeft:'10%'
   },
   textButon:{
     textAlign:'center',
-    color: 'white'
+    color: 'gray'
    
 },
 center:{

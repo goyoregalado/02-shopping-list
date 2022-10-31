@@ -23,7 +23,7 @@ export default function App() {
         <View style={styles.productList}>
           { 
             products.length === 0 
-              ? <Text>Aún no hay productos</Text> 
+              ? <Text style={styles.noProducts}>NO PRODUCTS YET</Text> 
               : products.map((product, idx) => (
                 <ListItem 
                   key={idx+product} 
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     width: '100%',
     marginTop: 30,
-    backgroundColor: 'lightgray',
+    backgroundColor: '#FFEEDB',
 
   },
   productList: {
@@ -54,5 +54,9 @@ const styles = StyleSheet.create({
   },
   productScroll: {
     width: '100%'
+  },
+  noProducts: {
+    marginTop: 120,
+    fontSize: 13
   }
 });

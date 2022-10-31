@@ -6,13 +6,13 @@ import {
     View } from 'react-native';
 
 const ListItem = ({ productName, onProductRemove }) => {
+
   return (
         <View style={styles.listItem}>
+            <Text style={styles.productName}>{productName}</Text>
             <Pressable style={{flexDirection: 'row'}} onPress={() => onProductRemove(productName)}>
                 <Image style={styles.productImage} source={require('../assets/bigIcon.png')} />
             </Pressable>
-            <Text style={styles.productName}>{productName}</Text>
-            
         </View>
     )
 }
@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: 'white',
         borderRadius: 5,
         width: '80%',
         marginBottom: 5,

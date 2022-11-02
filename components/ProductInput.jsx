@@ -1,95 +1,98 @@
 import { useState } from 'react';
-import { Button, StyleSheet, TextInput, View } from 'react-native';
-import SelectDropdown from 'react-native-select-dropdown'
-import NumericInput from 'react-native-numeric-input'
-import { uuid } from 'react-native-uuid';
-
+import SelectDropdown from 'react-native-select-dropdown';
+import NumericInput from 'react-native-numeric-input';
+import { Button, StyleSheet, TextInput, View} from 'react-native';
 
 const ProductInput = ({ onProductAdd }) => {
     const [productName, setProductName] = useState('');
-    const [typeName, setTypeName] = useState('');
-    const [quantity, setQuantity] = useState(1)
-    const productType = ["Fruit", "Vegetable", "Bakery", "Fish", "Meet"]
+    const [productType, setProductType] = useState('TYPE');
+    const [productQuantity, setProductQuantity] = useState(1);
+    const productCategory = ['Fruit', 'Vegetable', 'Bakery', 'Fish', 'Meat'];
 
-    const changeProductHandler = (value) => {
+    const changeTextHandler = (value) => {
         setProductName(value);
-    }
+    };
 
     const changeTypeHandler = (value) => {
-        setTypeName(value);
-    }
+        setProductType(value);
+    };
 
     const changeQuantityHandler = (value) => {
-        setQuantity(value);
-    }
+        setProductQuantity(value);
+    };
 
     const addProductHandler = () => {
-        const sanitizedName = productName.trim();
-        const key = uuid.v4();
-        if (sanitizedName !== '') {
-            onProductAdd(sanitizedName, quantity, typeName, key);
-        }
+        onProductAdd(productName, productType, productQuantity);
         setProductName('');
-        setTypeName('');
-        setQuantity(1);
-    }
+        setProductType('TYPE');
+        setProductQuantity(1);
+    };
+
+    const isEmpty = () => {
+        if (productName.trim() !== '' && productType !== 'TYPE') {
+            return false;
+        }
+        return true;
+    };
 
     return (
         <View>
         <View style={styles.productInput}>
             <View style={styles.boxName}>
-            <TextInput style={styles.productName}
-                placeholder='PRODUCT'
-                placeholderTextColor={"#FFFFFF"}
-                keyboardType="default"
-                onChangeText={changeProductHandler}
-                value={productName} />
+                    <TextInput 
+                        style={styles.productName}
+                        placeholder='PRODUCT'
+                        placeholderTextColor={'white'}
+                        onChangeText={changeTextHandler}
+                        value={productName} 
+                    />
             </View>
-            <View style={styles.boxType}>
-            <SelectDropdown 
-                data={productType}
-                totalWidth={50}
-                totalHeight={37} 
-                onSelect={(selectedItem, index) => {
-                    changeTypeHandler(selectedItem)
-               }}
-                buttonTextAfterSelection={(selectedItem) => {
-                    return selectedItem
-                }}
-                rowTextForSelection={(item) => {
-                    return item
-                }}
-                onChange={changeTypeHandler}
-                value={typeName}
-            />
-            </View> 
+            <View style={styles.productType}>
+                <SelectDropdown
+                    data={productCategory}
+                    buttonStyle={styles.dropdownButtonStyle}
+                    buttonTextStyle={styles.dropdownTextStyle}
+                    dropdownStyle={styles.dropdownStyle}
+                    onSelect={(selectedItem) => {
+                        changeTypeHandler(selectedItem);
+                    }}
+                    defaultButtonText={'TYPE'}
+                    buttonTextAfterSelection={() => {
+                        return productType;
+                    }}
+                    rowTextForSelection={(item) => {
+                        return item;
+                    }}
+                    />
+            </View>
         </View>
-        <View style={styles.boxQuantity}>
-            <NumericInput 
-                minValue={1}
-                maxValue={200}
-                editable={false}
-                totalWidth={100} 
-                totalHeight={37} 
-                iconSize={50}
-                step={1}
-                valueType='real'
-                rounded 
-                inputStyle={{color: '#ffff', backgroundColor: '#AA8F66'}}
-                iconStyle={{ color: '#AA8F66' }} 
-                rightButtonBackgroundColor='#ffff' 
-                leftButtonBackgroundColor='#ffff'
-                onChange={changeQuantityHandler} 
-                value={quantity}
-                />
-        </View>
-        <View style={styles.button}>
-            <Button
-                title="ADD"
-                onPress={addProductHandler}
-                color="#AA8F40"
-                />
-        </View>
+            <View>
+                <View style={styles.boxQuantity}>
+                    <NumericInput 
+                        textColor='white'
+                        iconStyle={{ color: 'white' }}
+                        rightButtonBackgroundColor='#5564eb' 
+                        leftButtonBackgroundColor='#5564eb'
+                        initValue={productQuantity}
+                        minValue={1}
+                        maxValue={200}
+                        totalWidth={90}
+                        totalHeight={40}
+                        step={1}
+                        rounded
+                        onChange={value => changeQuantityHandler(value)}
+                        editable={false}
+                        containerStyle={{ borderColor: 'white', borderRadius: 5}}
+                    />
+                </View>
+                <View style={styles.button}>
+                    <Button
+                        title="ADD"
+                        onPress={ addProductHandler }
+                        disabled={ isEmpty() }
+                    />
+                </View>
+            </View>
         </View>
     );
 }
@@ -99,51 +102,73 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
-        height: 90,
-        padding: 25,
-        marginTop: 35,
-    },
-    boxFatherQuantity: {
-        flexDirection: 'row',
-        justifyContent: 'center'
+        marginTop: 35
     },
     productName: {
-        flex: 4,
+        flex: 2,
         color: 'white',
         textAlign: 'center'
     },
     productType: {
-        flex: 4,
+        flex: 2,
         color: 'white',
-        textAlign: 'center'
+        textAlign: 'center',
+        marginRight: 20,
+        marginLeft: 16
     },
     boxName: {
-        backgroundColor: '#AA8F66',
-        marginRight: 10,
-        borderWidth: 2,
+        backgroundColor: '#5564eb',
+        borderWidth: 1,
         borderRadius: 5,
-        borderColor: '#AA8F66',
-        width: '50%'
-    },
-    boxType: {
-        backgroundColor: '#AA8F66',
-        marginLeft: 10,
-        borderWidth: 2,
-        borderRadius: 7,
-        borderColor: '#AA8F66',
-        width: '50%'
-    },  
-    button: {
-        marginTop: 10,
-        justifyContent: 'center',
+        borderColor: '#FFFF',
         alignItems: 'center',
+        width: '22%',
+        marginRight: 20,
+        marginLeft: 135,
+    },
+    button: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        marginTop: 10,
+        borderWidth: 1,
+        borderRadius: 5,
+        borderColor: '#FFFF',
+        width: 150,
+        marginHorizontal: 200,
+        backgroundColor: '#557DEB'
     },
     boxQuantity: {
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 10,
-        with: 10
+        marginTop: 30,
+        color: 'white'
+    },
+    dropdownTextStyle: {
+        textAlign:'center',
+        color: '#FFFF',
+        fontSize: 14
+    },
+    dropdownButtonStyle: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        backgroundColor: '#5564eb',
+        borderWidth: 1,
+        borderRadius: 5,
+        borderColor: '#FFFF',
+        width: '50%',
+        height: 40,
+        marginRight: 1,
+        color: 'white'
+    },
+    dropdownStyle: {
+        color: 'white',
+        width: '32%',
+        borderWidth: 1,
+        borderRadius: 5,
+        borderColor: '#FFFF',
+        backgroundColor: '#667ab0',
     }
+    
 });
 
 export default ProductInput;

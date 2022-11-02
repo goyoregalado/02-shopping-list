@@ -12,7 +12,14 @@
     "expo": "~46.0.13",
     "expo-status-bar": "~1.4.0",
     "react": "18.0.0",
-    "react-native": "0.69.6"
+    "react-native": "0.69.6",
+    "react-native-number-please": "^1.0.5",
+    "react-native-numeric-input": "^1.9.1",
+    "react-native-picker-select": "^8.0.4",
+    "react-native-select-dropdown": "^3.0.0",
+    "react-native-uuid": "^2.0.1",
+    "uuid": "^9.0.0",
+    "uuidv4": "^6.2.13"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

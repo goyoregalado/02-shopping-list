@@ -1,13 +1,22 @@
 import { useState } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
+
 import ProductInput from './components/ProductInput';
 import ListItem from './components/ListItem';
 
+import uuid from 'react-native-uuid';
+
+
 export default function App() {
+
   const [ products, setProducts ] = useState([]);
 
   const addProductHandler = (productName) => {
-    setProducts(() => [...products, productName]);
+    const productData = { key: uuid.v4(), value: productName}
+
+    console.log(productData);
+
+    setProducts(() => [...products, productData]);
   }
 
   const removeProductHandler = (productName) => {
@@ -18,21 +27,25 @@ export default function App() {
   return (
     <View style={styles.container}>
       <ProductInput onProductAdd={addProductHandler}/>
-
-        <ScrollView style={styles.productScroll}>
         <View style={styles.productList}>
-          { 
-            products.length === 0 
-              ? <Text>Aún no hay productos</Text> 
-              : products.map((product, idx) => (
+          { products.length === 0 ? (
+            <View>
+              <Text>Aún no se han introducido productos</Text>
+            </View>
+          ) : (
+            <FlatList data={products} renderItem={(productData) => {
+              const { key, value } = productData.item;
+
+              return (
                 <ListItem 
-                  key={idx+product} 
-                  productName={product} 
-                  onProductRemove={removeProductHandler}/>
-              ))
-          }
+                      key={key} 
+                      productName={value} 
+                      onProductRemove={removeProductHandler}/>
+              )
+            }} />
+          )
+        }
         </View>
-        </ScrollView>
     </View>
   );
 }
@@ -42,17 +55,14 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-start',
-    width: '100%',
+    width: '90%',
     marginTop: 30,
     backgroundColor: 'lightgray',
 
   },
   productList: {
     marginTop: 10,
-    width: '100%',
+    width: '90%',
     alignItems: 'center'
   },
-  productScroll: {
-    width: '100%'
-  }
 });

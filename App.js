@@ -1,38 +1,55 @@
 import { useState } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Button, FlatList, Modal, StyleSheet, Text, View } from 'react-native';
+
 import ProductInput from './components/ProductInput';
 import ListItem from './components/ListItem';
 
+import uuid from 'react-native-uuid';
+
+
 export default function App() {
+
   const [ products, setProducts ] = useState([]);
+  const [ showModal, setShowModal ] = useState(false);
 
   const addProductHandler = (productName) => {
-    setProducts(() => [...products, productName]);
+    const productData = { key: uuid.v4(), value: productName}
+
+    console.log(productData);
+
+    setProducts(() => [...products, productData]);
+    setShowModal(false);
   }
 
-  const removeProductHandler = (productName) => {
-    console.log(productName);
-    setProducts(() => products.filter((product) => product !== productName));
+  const removeProductHandler = (productId) => {
+    console.log(productId);
+    setProducts(() => products.filter((product) => product.key !== productId));
   }
 
   return (
     <View style={styles.container}>
-      <ProductInput onProductAdd={addProductHandler}/>
-
-        <ScrollView style={styles.productScroll}>
+      <Button title='mostrar' onPress={() => setShowModal(true)}/>
+      <ProductInput show={showModal} onProductAdd={addProductHandler}/>
         <View style={styles.productList}>
-          { 
-            products.length === 0 
-              ? <Text>Aún no hay productos</Text> 
-              : products.map((product, idx) => (
+          { products.length === 0 ? (
+            <View>
+              <Text>Aún no se han introducido productos</Text>
+            </View>
+          ) : (
+            <FlatList data={products} renderItem={(productData) => {
+              const { key, value } = productData.item;
+
+              return (
                 <ListItem 
-                  key={idx+product} 
-                  productName={product} 
-                  onProductRemove={removeProductHandler}/>
-              ))
-          }
+                      key={key}
+                      productId={key}
+                      productName={value} 
+                      onProductRemove={removeProductHandler}/>
+              )
+            }} />
+          )
+        }
         </View>
-        </ScrollView>
     </View>
   );
 }
@@ -42,17 +59,20 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-start',
-    width: '100%',
+    width: '90%',
     marginTop: 30,
     backgroundColor: 'lightgray',
 
   },
   productList: {
     marginTop: 10,
-    width: '100%',
+    width: '90%',
     alignItems: 'center'
   },
-  productScroll: {
-    width: '100%'
+  modalBody: {
+    backgroundColor: 'pink',
+    width: '70%',
+    height: 300,
+    marginTop: 200
   }
 });

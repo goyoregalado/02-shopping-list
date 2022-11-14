@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
-import { Button, StyleSheet, TextInput, View } from 'react-native';
+import { Button, Modal, StyleSheet, TextInput, View } from 'react-native';
 
-const ProductInput = ({ onProductAdd }) => {
+const ProductInput = ({ show, onProductAdd }) => {
     const [productName, setProductName] = useState('');
 
     const changeTextHandler = (value) => {
@@ -18,17 +18,19 @@ const ProductInput = ({ onProductAdd }) => {
     }
 
     return (
-        <View style={styles.productInput}>
-            <TextInput style={styles.productName}
-                placeholder='Introduzca un producto'
-                keyboardType="default"
-                onChangeText={changeTextHandler}
-                value={productName} />
-            <Button
-                style={styles.addButton}
-                title="Añadir"
-                onPress={addProductHandler} />
-        </View>
+        <Modal visible={show} animationType={'fade'} transparent={true}>
+            <View style={styles.productInput}>
+                <TextInput style={styles.productName}
+                    placeholder='Introduzca un producto'
+                    keyboardType="default"
+                    onChangeText={changeTextHandler}
+                    value={productName} />
+                <Button
+                    style={styles.addButton}
+                    title="Añadir"
+                    onPress={addProductHandler} />
+            </View>
+        </Modal>
     );
 }
 
